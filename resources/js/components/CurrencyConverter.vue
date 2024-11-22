@@ -2,13 +2,19 @@
   <div class="currency-converter">
     <h1 class="title">Конвертер валют</h1>
     <form @submit.prevent="convertCurrency" class="form">
-      <input v-model="amount" type="number" placeholder="Сумма" required class="input"/>
+      <input
+        v-model="amount"
+        type="number"
+        placeholder="Сумма"
+        required
+        class="input"
+        @input="convertCurrency">
       <div class="currency-select">
-        <select v-model="fromCurrency" required class="select">
+        <select v-model="fromCurrency" required class="select" @change="convertCurrency">
           <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
         </select>
         <span class="arrow">→</span>
-        <select v-model="toCurrency" required class="select">
+        <select v-model="toCurrency" required class="select" @change="convertCurrency">
           <option v-for="currency in currencies" :key="currency" :value="currency">{{ currency }}</option>
         </select>
       </div>
@@ -19,6 +25,8 @@
     </div>
   </div>
 </template>
+
+
 
 <script>
 export default {
@@ -37,27 +45,37 @@ export default {
 
   },
   methods: {
-    async convertCurrency() {
-      const response = await fetch('/convert-currency', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-          from: this.fromCurrency,
-          to: this.toCurrency,
-          amount: this.amount
-        })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        this.convertedAmount = data.converted_amount;
-      } else {
-        alert(data.error || 'Ошибка при конвертации');
-      }
+  async convertCurrency() {
+    // Проверяем, что amount не пустой
+    if (!this.amount || isNaN(this.amount)) {
+      this.convertedAmount = null;
+      return;
+    }
+
+    // Выполняем запрос на конвертацию
+    const response = await fetch('/convert-currency', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({
+        from: this.fromCurrency,
+        to: this.toCurrency,
+        amount: this.amount
+      })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      this.convertedAmount = data.converted_amount;
+    } else {
+      alert(data.error || 'Ошибка при конвертации');
     }
   }
+}
+
+
 };
 </script>
 
