@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Http;
 class CurrencyConverterController extends Controller
 {
     public function getRates()
-    {
-        $response = Http::withOptions(['verify' => false])
-            ->get('https://api.exchangerate-api.com/v4/latest/USD');
+{
+    $response = Http::withOptions(['verify' => false])
+        ->get('https://api.exchangerate-api.com/v4/latest'); // Get all currencies
 
-        return response()->json($response->json());
-    }
+    return response()->json($response->json());
+}
 
     public function convertCurrency(Request $request)
     {
