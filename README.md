@@ -3,7 +3,8 @@
 This is a simple currency converter built with Laravel and Vue.js. The app allows users to convert an amount of money from one currency to another. The design is clean, user-friendly, and responsive, making it easy to use on both desktop and mobile devices.
 
 ## Design Overview
-![Untitled](https://github.com/user-attachments/assets/560ace18-9a1c-4a90-b01d-5fb848ee7b33)
+![image](https://github.com/user-attachments/assets/3d634ece-61f9-4f8b-9390-1b919bfec5a7)
+
 
 ## Features
 
