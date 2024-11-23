@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.credit {
+  font-size: 1em;
+  color: #333333FF;
+  text-align: center;
+  font-weight: 600;
+}
+
