@@ -86,7 +86,7 @@ export default {
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  font-family: 'Jost';
+  font-family: 'Jost',sans-serif;
 
 }
 
@@ -161,7 +161,7 @@ export default {
 
 .result {
   margin-top: 30px;
-  font-size: 1.4em;
+  font-size: 1.6em;
   color: #333;
   font-weight: 700;
   text-align: center;
